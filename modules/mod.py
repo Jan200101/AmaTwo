@@ -39,9 +39,9 @@ class Mod:
         if ctx.message.author == member:
             await ctx.send(':x: You can\'t ban yourself!')
         elif self.bot.admin_role in member.roles:
-            await ctx.send(":x: You can't ban a Administrator")
+            await ctx.send(":x: You can't ban an Administrator!")
         elif self.bot.mod_role in member.roles and not self.bot.admin_role in ctx.message.author.roles:
-            await ctx.send(":x: You can't ban a Moderator")
+            await ctx.send(":x: You can't ban a Moderator!")
         else:
             await member.ban(reason=reason)
             embed = Embed(title="Member banned by {}".format(ctx.message.author.name),
