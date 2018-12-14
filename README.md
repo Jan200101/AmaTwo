@@ -4,7 +4,8 @@ Rewrite version of AmaRewrite using discord.py 1.0.0a
 
 ## Credits:
 
-nh-server/Kurisu  
+nh-server/Kurisu for referencing
+(Jan200101)[https://github.com/Jan200101] for rewriting the bot from scratch! Seriously, massive thanks!
 Various online sources
 
 # Notes:
