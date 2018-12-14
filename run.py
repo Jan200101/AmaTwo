@@ -71,16 +71,14 @@ async def on_ready():
         try:
             bot.guild = guild
 
-            bot.log_channel = utils.get(guild.channels, id=log_id)
-            bot.welcome_channel = utils.get(guild.channels, id=welcome_id)
+            # Temporary workaround because using the ID results in a "NoneType" error when trying to send to a channel
+            bot.log_channel = utils.get(guild.channels, name="server-log-owo♥♥")
+            bot.welcome_channel = utils.get(guild.channels, name="📝welcome-txt")
 
-            # Temporary workaround
+            # Temporary workaround because using the ID results in a "NoneType" error when trying to assign or check a role
             bot.bot_role = utils.get(guild.roles, name="Bot")
-            # because it won't accept
             bot.bit_role = utils.get(guild.roles, name="Bit")
-            # the role ID but it does
             bot.mod_role = utils.get(guild.roles, name="Moderator")
-            # accept the name, idk why
             bot.admin_role = utils.get(guild.roles, name="Administrator")
 
             print('{0.user} is up and running on {1.name}!'.format(bot, guild))
