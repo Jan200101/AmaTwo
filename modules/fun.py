@@ -28,7 +28,7 @@ class Fun:
         self.wallets[user] += DAILYCREDIT
         with open("data/wallets.json", "w") as config:
             dump(self.wallets, config, indent=2, sort_keys=True)
-        await ctx.send(':moneybad: Wallet updated successfully! Your balance is now {}'.format(self.wallets[user]))
+        await ctx.send(':moneybag: Wallet updated successfully! Your balance is now {}'.format(self.wallets[user]))
 
     @commands.has_permissions(ban_members=True)
     @commands.command(aliases=['givecredit', 'gc'])
@@ -39,7 +39,7 @@ class Fun:
         self.wallets[user] += amount
         with open("data/wallets.json", "w") as config:
             dump(self.wallets, config, indent=2, sort_keys=True)
-        await ctx.send(':moneybad: Wallet updated successfully! Your balance is now {}'.format(self.wallets[user]))
+        await ctx.send(':moneybag: Wallet updated successfully! Your balance is now {}'.format(self.wallets[user]))
 
     @commands.command(aliases=["cf", "coin", "flip"])
     async def coinflip(self, ctx):
