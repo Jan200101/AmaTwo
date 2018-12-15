@@ -1,4 +1,4 @@
-# AmaRewrite
+# AmaTwo
 
 Rewrite version of AmaRewrite using discord.py 1.0.0a
 
