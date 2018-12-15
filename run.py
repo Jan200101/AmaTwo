@@ -1,12 +1,12 @@
 # Rewriten from scratch to have the same behavior as AmaRewrite but be
 # written from original code instead
 
-from discord import utils, __version__ as dpy_version
+from discord import utils, Embed, __version__ as dpy_version
 from discord.ext import commands
 from os import path, chdir
 from json import load
 from json.decoder import JSONDecodeError
-from traceback import format_exception
+import traceback
 
 from modules.utils.setup import Setup
 
@@ -50,6 +50,21 @@ except FileNotFoundError:
 
 bot = commands.Bot(command_prefix=prefix, description=description)
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        await ctx.send(":x: Looks like you don't have permission to use this!")
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send(":x: Looks like you're missing a required argument!")
+    elif isinstance(error, commands.BadArgument):
+        await ctx.send(":x: Bad or incorrect argument sent! Please try again.")
+    else:
+        if ctx.command:
+            await ctx.send(":x: An error has occured processing that command!", delete_after=10)
+        err_traceback = "".join(traceback.format_exception(type(error), error, error.__traceback__))
+        print(err_traceback)
+        embed = Embed(title="Error on command `{}` in #`{}`:", description=err_traceback)
+        await bot.log_channel.send(embed=embed)
 
 @bot.event
 async def on_ready():
