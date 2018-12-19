@@ -60,11 +60,9 @@ async def on_command_error(ctx, error):
         await ctx.send(":x: Bad or incorrect argument sent! Please try again.")
     elif isinstance(error, commands.CommandOnCooldown):
         try:
-            await bot.delete_message(ctx.message)
+            await ctx.message.delete()
         except:
             pass
-        print(error.cooldown.per)
-        print(error.retry_after)
         # ugly solution but I guess it works for now because time is hard
         retry_after = error.retry_after % (24*3600)
         retry_h = retry_after / 3600
