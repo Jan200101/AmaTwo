@@ -58,6 +58,19 @@ async def on_command_error(ctx, error):
         await ctx.send(":x: Looks like you're missing a required argument!")
     elif isinstance(error, commands.BadArgument):
         await ctx.send(":x: Bad or incorrect argument sent! Please try again.")
+    elif isinstance(error, commands.CommandOnCooldown):
+        try:
+            await bot.delete_message(ctx.message)
+        except:
+            pass
+        print(error.cooldown.per)
+        print(error.retry_after)
+        # ugly solution but I guess it works for now because time is hard
+        retry_after = error.retry_after % (24*3600)
+        retry_h = retry_after / 3600
+        retry_after %= 3600
+        retry_m = retry_after / 60
+        await ctx.send(":x: This command is on cooldown! Please try again in {:.2f}h {:.2f}m.".format(retry_h, retry_m))
     else:
         if ctx.command:
             await ctx.send(":x: An error has occured processing that command!", delete_after=10)
