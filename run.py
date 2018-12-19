@@ -80,7 +80,7 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_ready():
     modules = ['modules.fun', 'modules.logging',
-               'modules.mod', 'modules.utility', ]
+               'modules.mod', 'modules.utility']
 
     failed_modules = []
 
@@ -103,7 +103,7 @@ async def on_ready():
 
             # Temporary workaround because using the ID results in a "NoneType" error when trying to assign or check a role
             bot.bot_role = utils.get(guild.roles, name="Bot")
-            bot.bit_role = utils.get(guild.roles, name="Bit")
+            bot.default_roles = [utils.get(guild.roles, name="Bit"), utils.get(bot.guild.roles, name="⁣          Hobby Roles          ⁣")]
             bot.mod_role = utils.get(guild.roles, name="Moderator")
             bot.admin_role = utils.get(guild.roles, name="Administrator")
 

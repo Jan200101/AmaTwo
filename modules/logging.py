@@ -1,5 +1,4 @@
-from discord import Embed
-
+from discord import Embed, utils
 
 class Logging:
     """
@@ -18,7 +17,12 @@ class Logging:
         if member.bot:
             await member.add_roles(self.bot.bot_role)
         else:
-            await member.add_role(self.bot.bit_role)
+            try:
+                for role in self.bot.default_roles:
+                    await member.add_roles(role)
+                embed.set_footer(text="Default roles assigned successfully")
+            except:
+                embed.set_footer(text="Error setting one or more default roles! Must be assigned manually.")
         await self.bot.log_channel.send(embed=embed)
 
     async def on_member_remove(self, member):
