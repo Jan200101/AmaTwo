@@ -65,7 +65,7 @@ async def on_command_error(ctx, error):
             pass
         # ugly solution but I guess it works for now because time is hard
         retry_after = error.retry_after % (24*3600)
-        retry_h = retry_after / 3600
+        retry_h = retry_after / 3600 - 1
         retry_after %= 3600
         retry_m = retry_after / 60
         await ctx.send(":x: This command is on cooldown! Please try again in {:.2f}h {:.2f}m.".format(retry_h, retry_m))
