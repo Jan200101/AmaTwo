@@ -54,11 +54,11 @@ bot = commands.Bot(command_prefix=prefix, description=description)
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
-        await ctx.send(":x: Looks like you don't have permission to use this!")
+        await ctx.send(":x: Looks like you don't have permission to use this!", delete_after=10)
     elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(":x: Looks like you're missing a required argument!")
+        await ctx.send(":x: Looks like you're missing a required argument!", delete_after=10)
     elif isinstance(error, commands.BadArgument):
-        await ctx.send(":x: Bad or incorrect argument sent! Please try again.")
+        await ctx.send(":x: Bad or incorrect argument sent! Please try again.", delete_after=10)
     elif isinstance(error, commands.CommandOnCooldown):
         try:
             await ctx.message.delete()
@@ -69,7 +69,7 @@ async def on_command_error(ctx, error):
         retry_h = retry_after / 3600 - 1
         retry_after %= 3600
         retry_m = retry_after / 60
-        await ctx.send(":x: This command is on cooldown! Please try again in {:.2f}h {:.2f}m.".format(retry_h, retry_m))
+        await ctx.send(":x: This command is on cooldown! Please try again in {:.2f}h {:.2f}m.".format(retry_h, retry_m), delete_after=10)
     else:
         if ctx.command:
             await ctx.send(":x: An error has occured processing that command!", delete_after=10)
