@@ -1,5 +1,5 @@
-#!/bin/bash/
+#!/bin/bash
 echo "Restarting Amadeus..."
-pkill -f run.py
-python3 run.py
+sudo pkill -f run.py
+sudo python3 run.py
 echo "Restart complete!"
