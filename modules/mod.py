@@ -10,6 +10,9 @@ class Mod:
     def __init__(self, bot):
         self.bot = bot
 
+    async def is_owner(ctx):
+        return ctx.message.author.id == 165566685540122625
+
     @commands.has_permissions(kick_members=True)
     @commands.command()
     async def kick(self, ctx, member: Member, reason: str="No reason given"):
@@ -64,9 +67,26 @@ class Mod:
         else:
             cfg = cfg # ¯\_(ツ)_/¯
         with open(cfg, "r") as f:
-            contents = json.loads(f.read())
+            contents = f.read()
         await ctx.send("```{}```".format(contents))
 
+    @commands.check(is_owner)
+    @commands.command()
+    async def editcfg(self, ctx, cfg, *, content):
+        """
+        Edits a config file. Uses entire json file. Must be within Discord character limit for now.
+        """
+        # Very hacky solution for now until I figure out
+        # how to edit/add individual fields to the file
+        if not cfg.startswith("data/"):
+            cfg = "data/{}".format(cfg)
+        else:
+            cfg = cfg # ¯\_(ツ)_/¯
+        print(content)
+        data = json.loads(content)
+        with open(cfg, "w+") as f:
+            json.dump(data, f, indent=2, sort_keys=True)
+        await ctx.send("File `{}` edited successfully.".format(cfg))
 
 def setup(bot):
     bot.add_cog(Mod(bot))
