@@ -82,11 +82,16 @@ class Mod:
             cfg = "data/{}".format(cfg)
         else:
             cfg = cfg # ¯\_(ツ)_/¯
-        print(content)
+        embed = Embed(title="Configuration file edited: {}".format(cfg))
+        with open(cfg, "r") as f:
+            content_before = f.read()
+        embed.add_field(name="Before:", value=content_before)
+        embed.add_field(name="After:", value=content)
         data = json.loads(content)
         with open(cfg, "w+") as f:
             json.dump(data, f, indent=2, sort_keys=True)
         await ctx.send("File `{}` edited successfully.".format(cfg))
+        await self.bot.log_channel.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Mod(bot))

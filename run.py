@@ -75,7 +75,7 @@ async def on_command_error(ctx, error):
             await ctx.send(":x: An error has occured processing that command!", delete_after=10)
         err_traceback = "".join(traceback.format_exception(type(error), error, error.__traceback__))
         print(err_traceback)
-        embed = Embed(title="Error on command `{}` in #`{}`:", description=err_traceback)
+        embed = Embed(title="Error on command `{}`:".format(ctx.command.name), description=err_traceback)
         await bot.log_channel.send(embed=embed)
 
 @bot.event
