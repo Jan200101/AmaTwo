@@ -104,10 +104,11 @@ class Mod:
         embed = Embed(title="Configuration file edited: {}".format(cfg))
         embed.add_field(name="Field:", value=key)
         embed.add_field(name="Value:", value=value)
-        with open(cfg, "w+") as f:
+        with open(cfg, "r") as f:
             data = json.load(f)
             data[key] = value
-            json.dump(f, data, indent=2, sort_keys=True)
+        with open(cfg, "r+") as f:
+            json.dump(data, f, indent=2, sort_keys=True)
         await ctx.send("File `{}` edited successfully.".format(cfg))
         await self.bot.log_channel.send(embed=embed)
 
