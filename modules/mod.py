@@ -1,6 +1,6 @@
 from discord import Member, Embed
 from discord.ext import commands
-
+import json
 
 class Mod:
     """
@@ -49,6 +49,23 @@ class Mod:
             embed.set_thumbnail(url=member.avatar_url)
             await self.bot.log_channel.send(embed=embed)
             await ctx.send(':hammer: Banned user successfully!')
+
+    @commands.has_permissions(kick_members=True)
+    @commands.command()
+    async def printcfg(self, ctx, cfg):
+        """
+        Prints the contents of any .json file in the data folder.
+        """
+        # For use with the upcoming "editcfg" command that I'll add when I have time
+        # This will allow configs to be edited, created, etc. on the fly
+        # Maybe it'll evel allow entire custom module creation through commands alone eventually
+        if not cfg.startswith("data/"):
+            cfg = "data/{}".format(cfg)
+        else:
+            cfg = cfg # ¯\_(ツ)_/¯
+        with open(cfg, "r") as f:
+            contents = json.loads(f.read())
+        await ctx.send("```{}```".format(contents))
 
 
 def setup(bot):

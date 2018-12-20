@@ -7,6 +7,7 @@ from os import path, chdir
 from json import load
 from json.decoder import JSONDecodeError
 import traceback
+import modules.utils.setup
 
 from modules.utils.setup import Setup
 
