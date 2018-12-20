@@ -72,12 +72,10 @@ class Mod:
 
     @commands.check(is_owner)
     @commands.command()
-    async def editcfg(self, ctx, cfg, *, content):
+    async def dumpcfg(self, ctx, cfg, *, content):
         """
         Edits a config file. Uses entire json file. Must be within Discord character limit for now.
         """
-        # Very hacky solution for now until I figure out
-        # how to edit/add individual fields to the file
         if not cfg.startswith("data/"):
             cfg = "data/{}".format(cfg)
         else:
@@ -90,6 +88,26 @@ class Mod:
         data = json.loads(content)
         with open(cfg, "w+") as f:
             json.dump(data, f, indent=2, sort_keys=True)
+        await ctx.send("File `{}` edited successfully.".format(cfg))
+        await self.bot.log_channel.send(embed=embed)
+
+    @commands.check(is_owner)
+    @commands.command()
+    async def editcfg(self, ctx, cfg, key, value):
+        """
+        Edits a specific key of a specified file.
+        """
+        if not cfg.startswith("data/"):
+            cfg = "data/{}".format(cfg)
+        else:
+            cfg = cfg # ¯\_(ツ)_/¯
+        embed = Embed(title="Configuration file edited: {}".format(cfg))
+        embed.add_field(name="Field:", value=key)
+        embed.add_field(name="Value:", value=value)
+        with open(cfg, "w+") as f:
+            data = json.load(f)
+            data[key] = value
+            json.dump(f, data, indent=2, sort_keys=True)
         await ctx.send("File `{}` edited successfully.".format(cfg))
         await self.bot.log_channel.send(embed=embed)
 

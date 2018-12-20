@@ -16,7 +16,7 @@ class Utility:
         """
         Get information about a certain user, or yourself, if no user is specified
         """
-        with open('wallets.json') as f:
+        with open('data/wallets.json') as f:
             wallets = json.load(f)
         if not member:
             member = ctx.message.author
