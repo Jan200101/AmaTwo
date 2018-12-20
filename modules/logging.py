@@ -54,7 +54,7 @@ class Logging:
             await self.bot.log_channel.send(embed=embed)
 
     async def on_message_delete(self, message):
-        if message.channel != self.bot.log_channel:
+        if message.channel != self.bot.log_channel and message.author != self.bot.user:
             embed = Embed(title="Message by {} deleted in #{}".format(
                 message.author.name, message.channel.name), color=0xFF6647)
             embed.set_thumbnail(url=message.author.avatar_url)

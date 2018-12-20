@@ -1,6 +1,8 @@
 from discord import Member, Embed
 from discord.ext import commands
 import json
+import subprocess
+import os
 
 class Mod:
     """
@@ -111,6 +113,17 @@ class Mod:
             json.dump(data, f, indent=2, sort_keys=True)
         await ctx.send("File `{}` edited successfully.".format(cfg))
         await self.bot.log_channel.send(embed=embed)
+
+    @commands.check(is_owner)
+    @commands.command()
+    async def update_bot(self, ctx):
+        """
+        Pulls the latest commit from GitHub and restarts the bot
+        """
+        await ctx.send(":repeat: Pulling changes...")
+        subprocess.call(["git","pull"])
+        await ctx.send(":electric_plug: Restarting, please wait...")
+        os.system("./restart.sh")
 
 def setup(bot):
     bot.add_cog(Mod(bot))
