@@ -133,6 +133,7 @@ class Mod:
         else:
             cfg = cfg # ¯\_(ツ)_/¯
         if ctx.invoked_with == "mkcfg":
+            defaults = json.loads(defaults)
             with open(cfg, "w+") as f:
                 json.dump(defaults, f, indent=2, sort_keys=True)
         elif ctx.invoked_with == "rmcfg":
