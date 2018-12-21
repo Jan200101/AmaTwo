@@ -143,7 +143,7 @@ class Mod:
         elif ctx.invoked_with == "rmcfg":
             if os.path.exists(cfg):
                 os.remove(cfg)
-                await ctx.send("{} removed successfully.".format(cfg))
+                await ctx.send("`{}` removed successfully.".format(cfg))
                 embed = Embed(title="Configuration file deleted: {}".format(cfg))
                 await self.bot.log_channel.send(embed=embed)
 
