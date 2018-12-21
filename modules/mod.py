@@ -127,7 +127,7 @@ class Mod:
 
     @commands.check(is_owner)
     @commands.command(aliases=["rmcfg"])
-    async def mkcfg(self, ctx, cfg, defaults="{}"):
+    async def mkcfg(self, ctx, cfg, *, defaults="{}"):
         if not cfg.startswith("data/"):
             cfg = "data/{}".format(cfg)
         else:
