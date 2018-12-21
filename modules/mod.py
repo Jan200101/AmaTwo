@@ -134,7 +134,7 @@ class Mod:
             cfg = cfg # ¯\_(ツ)_/¯
         if ctx.invoked_with == "mkcfg":
             with open(cfg, "w+") as f:
-                json.dumps(defaults, f, indent=2, sort_keys=True)
+                json.dump(defaults, f, indent=2, sort_keys=True)
         elif ctx.invoked_with == "rmcfg":
             if os.path.exists(cfg):
                 os.remove(cfg)
