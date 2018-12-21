@@ -115,7 +115,7 @@ class Mod:
         await self.bot.log_channel.send(embed=embed)
 
     @commands.check(is_owner)
-    @commands.command()
+    @commands.command(aliases=["restart_bot","update","restart"])
     async def update_bot(self, ctx):
         """
         Pulls the latest commit from GitHub and restarts the bot
