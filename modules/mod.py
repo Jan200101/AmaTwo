@@ -127,14 +127,14 @@ class Mod:
 
     @commands.check(is_owner)
     @commands.command(aliases=["rmcfg"])
-    async def mkcfg(self, ctx, cfg, defaults):
+    async def mkcfg(self, ctx, cfg, defaults="{}"):
         if not cfg.startswith("data/"):
             cfg = "data/{}".format(cfg)
         else:
             cfg = cfg # ¯\_(ツ)_/¯
         if ctx.invoked_with == "mkcfg":
             with open(cfg, "w+") as f:
-                json.dump(defaults, f, indent=2, sort_keys=True)
+                json.dumps(defaults, f, indent=2, sort_keys=True)
         elif ctx.invoked_with == "rmcfg":
             if os.path.exists(cfg):
                 os.remove(cfg)
