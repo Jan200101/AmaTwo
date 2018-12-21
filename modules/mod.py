@@ -136,13 +136,14 @@ class Mod:
             defaults = json.loads(defaults)
             with open(cfg, "w+") as f:
                 json.dump(defaults, f, indent=2, sort_keys=True)
-            await ctx.send("Make config with default settings ```{}```".format(defaults))
+            await ctx.send("Made config with default settings: `{}`".format(defaults))
             embed = Embed(title="Configuration file created: {}".format(cfg))
             embed.add_field(name="Content:", value=defaults)
             await self.bot.log_channel.send(embed=embed)
         elif ctx.invoked_with == "rmcfg":
             if os.path.exists(cfg):
                 os.remove(cfg)
+                await ctx.send("{} removed successfully.".format(cfg))
                 embed = Embed(title="Configuration file deleted: {}".format(cfg))
                 await self.bot.log_channel.send(embed=embed)
 
