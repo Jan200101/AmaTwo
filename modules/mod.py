@@ -125,5 +125,20 @@ class Mod:
         await ctx.send(":electric_plug: Restarting, please wait...")
         os.system("./restart.sh")
 
+    @commands.check(is_owner)
+    @commands.command(aliases=["rmcfg"])
+    async def mkcfg(self, ctx, cfg, defaults):
+        if not cfg.startswith("data/"):
+            cfg = "data/{}".format(cfg)
+        else:
+            cfg = cfg # ¯\_(ツ)_/¯
+        if ctx.invoked_with == "mkcfg":
+            with open("data/{}".format(cfg), "w") as f:
+                dump(defaults, f, indent=2, sort_keys=True)
+        elif ctx.invoked_with == "rmcfg":
+            if os.path.exists(cfg):
+                os.remove(cfg)
+
+
 def setup(bot):
     bot.add_cog(Mod(bot))
