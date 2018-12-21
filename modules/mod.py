@@ -133,7 +133,7 @@ class Mod:
         else:
             cfg = cfg # ¯\_(ツ)_/¯
         if ctx.invoked_with == "mkcfg":
-            with open("data/{}".format(cfg), "w") as f:
+            with open("cfg", "w+") as f:
                 dump(defaults, f, indent=2, sort_keys=True)
         elif ctx.invoked_with == "rmcfg":
             if os.path.exists(cfg):
