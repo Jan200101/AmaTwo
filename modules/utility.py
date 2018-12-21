@@ -1,4 +1,4 @@
-from discord import Member, Embed, TextChannel, VoiceChannel
+from discord import Member, Embed, TextChannel, VoiceChannel, __version__ as dpy_version
 from discord.ext import commands
 import json
 
@@ -86,7 +86,7 @@ class Utility:
     async def about(self, ctx):
         embed = Embed(title="Amadeus by dj505", color=0xFF4714)
         embed.set_thumbnail(url=self.bot.user.avatar_url)
-        embed.add_field(name="About", value="Amadeus is a bot developed initially by dj505 and rewritten with the help of Jan20010, written in Python using discord.py {}".format(discord.__version__))
+        embed.add_field(name="About", value="Amadeus is a bot developed initially by dj505 and rewritten with the help of Jan20010, written in Python using discord.py {}".format(dpy_version))
         embed.add_field(name="Source", value="https://github.com/dj505/AmaTwo")
         ctx.send(embed=embed)
 
