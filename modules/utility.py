@@ -88,7 +88,7 @@ class Utility:
         embed.set_thumbnail(url=self.bot.user.avatar_url)
         embed.add_field(name="About", value="Amadeus is a bot developed initially by dj505 and rewritten with the help of Jan20010, written in Python using discord.py {}".format(dpy_version))
         embed.add_field(name="Source", value="https://github.com/dj505/AmaTwo")
-        ctx.send(embed=embed)
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Utility(bot))
